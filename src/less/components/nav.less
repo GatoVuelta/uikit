@@ -12,6 +12,7 @@
 // Modifiers:       `uk-nav-default`
 //                  `uk-nav-primary`
 //                  `uk-nav-center`,
+//                  `uk-nav-background`,
 //                  `uk-nav-divider`
 //
 // States:          `uk-active`
@@ -72,7 +73,16 @@
 @nav-primary-sublist-item-hover-color:          @global-color;
 @nav-primary-sublist-item-active-color:         @global-emphasis-color;
 
+@nav-background-margin-top:                     0;
+@nav-background-item-padding-horizontal:        10px;
+@nav-background-item-padding-vertical:          10px;
+@nav-background-item-hover-background:          @global-muted-background;
+@nav-background-item-hover-color:               @global-color;
+@nav-background-item-active-background:         @global-muted-background;
+@nav-background-item-active-color:              @global-emphasis-color;
+
 @nav-dividers-margin-top:                       5px;
+
 @nav-dividers-border-width:                     @global-border-width;
 @nav-dividers-border:                           @global-border;
 
@@ -142,7 +152,7 @@ ul.uk-nav-sub {
 .uk-nav-sub a { padding: @nav-sublist-item-padding-vertical 0; }
 
 
-/* Parent icon modifier
+/* Parent icon
  ========================================================================== */
 
 .uk-nav-parent-icon { margin-left: auto; }
@@ -335,12 +345,45 @@ ul.uk-nav-sub {
 .uk-nav-center .uk-nav-sub,
 .uk-nav-center .uk-nav-sub ul { padding-left: 0; }
 
-/* Parent icon modifier  */
+/* Parent icon  */
 .uk-nav-center .uk-nav-parent-icon { margin-left: 0; }
 
 
-/* Style modifier
+/* Style modifiers
  ========================================================================== */
+
+/*
+ * Background
+ */
+
+ .uk-nav-background > :not(.uk-nav-divider) + :not(.uk-nav-header, .uk-nav-divider) {
+    margin-top: @nav-background-margin-top;
+    .hook-nav-background();
+}
+
+.uk-nav-background > li > a {
+    padding: @nav-background-item-padding-vertical @nav-background-item-padding-horizontal;
+    .hook-nav-background-item();
+}
+
+/* Hover */
+.uk-nav-background > li > a:hover {
+    background-color: @nav-background-item-hover-background;
+    color: @nav-background-item-hover-color;
+    .hook-nav-background-item-hover();
+}
+
+/* Active */
+.uk-nav-background > li.uk-active > a {
+    background-color: @nav-background-item-active-background;
+    color: @nav-background-item-active-color;
+    .hook-nav-background-item-active();
+}
+
+/*
+ * Divider
+ * Naming is in plural to prevent conflicts with divider sub object.
+ */
 
 .uk-nav.uk-nav-divider > :not(.uk-nav-divider) + :not(.uk-nav-header, .uk-nav-divider) {
     margin-top: @nav-dividers-margin-top;
@@ -372,7 +415,12 @@ ul.uk-nav-sub {
 .hook-nav-primary-subtitle() {}
 .hook-nav-primary-header() {}
 .hook-nav-primary-divider() {}
+.hook-nav-background() {}
+.hook-nav-background-item() {}
+.hook-nav-background-item-hover() {}
+.hook-nav-background-item-active() {}
 .hook-nav-dividers() {}
+.hook-nav-background() {}
 .hook-nav-misc() {}
 
 
@@ -396,6 +444,11 @@ ul.uk-nav-sub {
 @inverse-nav-primary-sublist-item-color:        @inverse-global-muted-color;
 @inverse-nav-primary-sublist-item-hover-color:  @inverse-global-color;
 @inverse-nav-primary-sublist-item-active-color: @inverse-global-emphasis-color;
+
+@inverse-nav-background-item-hover-background:  @inverse-global-muted-background;
+@inverse-nav-background-item-hover-color:       @inverse-global-color;
+@inverse-nav-background-item-active-background: @inverse-global-muted-background;
+@inverse-nav-background-item-active-color:      @inverse-global-emphasis-color;
 
 @inverse-nav-dividers-border:                   @inverse-global-border;
 
@@ -472,12 +525,30 @@ ul.uk-nav-sub {
     .uk-nav-primary .uk-nav-sub li.uk-active > a { color: @inverse-nav-primary-sublist-item-active-color; }
 
     //
-    // Dividers
+    // Background
+    //
+
+    /* Hover */
+    .uk-nav-background > li > a:hover {
+        background-color: @inverse-nav-background-item-hover-background;
+        color: @inverse-nav-background-item-hover-color;
+        .hook-inverse-nav-background-item-hover();
+    }
+    
+    /* Active */
+    .uk-nav-background > li.uk-active > a {
+        background-color: @inverse-nav-background-item-active-background;
+        color: @inverse-nav-background-item-active-color;
+        .hook-inverse-nav-background-item-active();
+    }
+    
+    //
+    // Divider
     //
 
     .uk-nav.uk-nav-divider > :not(.uk-nav-divider) + :not(.uk-nav-header, .uk-nav-divider) {
         border-top-color: @inverse-nav-dividers-border;
-        .hook-nav-dividers();
+        .hook-inverse-nav-dividers();
     }
 
 }
@@ -491,5 +562,7 @@ ul.uk-nav-sub {
 .hook-inverse-nav-primary-item-hover() {}
 .hook-inverse-nav-primary-item-active() {}
 .hook-inverse-nav-primary-header() {}
+.hook-inverse-nav-background-item-hover() {}
+.hook-inverse-nav-background-item-active() {}
 .hook-inverse-nav-primary-divider() {}
 .hook-inverse-nav-dividers() {}
