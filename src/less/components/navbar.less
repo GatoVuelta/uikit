@@ -17,7 +17,7 @@
 //                  `uk-navbar-dropbar`
 //
 // Adopted:         `uk-navbar-dropdown` + Modifiers
-//                  `uk-navbar-dropdown-nav`
+//                  `uk-navbar-dropdown-nav` + Modifiers
 //                  `uk-navbar-dropdown-grid`
 //                  `uk-navbar-toggle-icon`
 //
@@ -101,6 +101,17 @@
 @navbar-dropdown-nav-sublist-item-color:        @global-muted-color;
 @navbar-dropdown-nav-sublist-item-hover-color:  @global-color;
 @navbar-dropdown-nav-sublist-item-active-color: @global-emphasis-color;
+@navbar-dropdown-nav-background-margin-top:                     0;
+@navbar-dropdown-nav-background-item-padding-horizontal:        10px;
+@navbar-dropdown-nav-background-item-padding-vertical:          10px;
+@navbar-dropdown-nav-background-item-color:                     @global-color;
+@navbar-dropdown-nav-background-item-hover-background:          @global-muted-background;
+@navbar-dropdown-nav-background-item-hover-color:               @global-color;
+@navbar-dropdown-nav-background-item-active-background:         @global-muted-background;
+@navbar-dropdown-nav-background-item-active-color:              @global-emphasis-color;
+@navbar-dropdown-nav-dividers-margin-top:                       0;
+@navbar-dropdown-nav-dividers-border-width:                     @global-border-width;
+@navbar-dropdown-nav-dividers-border:                           @global-border;
 
 @navbar-dropbar-background:                     @navbar-dropdown-background;
 @navbar-dropbar-z-index:                        @global-z-index - 20;
@@ -525,7 +536,6 @@
 }
 
 
-
 /* Dropdown Nav
  * Adopts `uk-nav`
  ========================================================================== */
@@ -592,6 +602,47 @@
 
 .uk-navbar-dropdown-nav .uk-nav-sub li.uk-active > a { color: @navbar-dropdown-nav-sublist-item-active-color; }
 
+/*
+ * Background
+ */
+
+.uk-navbar-dropdown-nav-background > :not(.uk-navbar-dropdown-nav-divider) + :not(.uk-navbar-dropdown-nav-header, .uk-navbar-dropdown-nav-divider) {
+    margin-top: @navbar-dropdown-nav-background-margin-top;
+    .hook-navbar-dropdown-nav-background();
+}
+
+.uk-navbar-dropdown-nav-background > li > a {
+    padding: @navbar-dropdown-nav-background-item-padding-vertical @navbar-dropdown-nav-background-item-padding-horizontal;
+    color: @navbar-dropdown-nav-background-item-color;
+    .hook-navbar-dropdown-nav-background-item();
+}
+
+/* Hover */
+.uk-navbar-dropdown-nav-background > li > a:hover {
+    background-color: @navbar-dropdown-nav-background-item-hover-background;
+    color: @navbar-dropdown-nav-background-item-hover-color;
+    .hook-navbar-dropdown-nav-background-item-hover();
+}
+
+/* Active */
+.uk-navbar-dropdown-nav-background > li.uk-active > a {
+    background-color: @navbar-dropdown-nav-background-item-active-background;
+    color: @navbar-dropdown-nav-background-item-active-color;
+    .hook-navbar-dropdown-nav-background-item-active();
+}
+
+/*
+ * Divider
+ * Naming is in plural to prevent conflicts with divider sub object.
+ */
+
+.uk-navbar-dropdown-nav.uk-navbar-dropdown-nav-divider > :not(.uk-navbar-dropdown-nav-divider) + :not(.uk-navbar-dropdown-nav-header, .uk-navbar-dropdown-nav-divider) {
+    margin-top: @navbar-dropdown-nav-dividers-margin-top;
+    padding-top: @navbar-dropdown-nav-dividers-margin-top;
+    border-top: @navbar-dropdown-nav-dividers-border-width solid @navbar-dropdown-nav-dividers-border;
+    .hook-navbar-dropdown-nav-dividers();
+}
+
 
 /* Dropbar
  ========================================================================== */
@@ -636,6 +687,11 @@
 .hook-navbar-dropdown-nav-subtitle() {}
 .hook-navbar-dropdown-nav-header() {}
 .hook-navbar-dropdown-nav-divider() {}
+.hook-navbar-dropdown-nav-background() {}
+.hook-navbar-dropdown-nav-background-item() {}
+.hook-navbar-dropdown-nav-background-item-hover() {}
+.hook-navbar-dropdown-nav-background-item-active() {}
+.hook-navbar-dropdown-nav-dividers() {}
 .hook-navbar-dropbar() {}
 .hook-navbar-misc() {}
 

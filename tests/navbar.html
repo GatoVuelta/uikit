@@ -155,52 +155,66 @@
                     </div>
 
                 </div>
-                <div class="uk-width-1-4@m">
+                <div class="uk-width-1-2@m">
 
-                    <div class="uk-navbar-dropdown test">
+                    <div class="uk-margin">
+                        <select id="js-nav-style-switcher" class="uk-select uk-form-width-small">
+                            <option value="">Default</option>
+                            <option value="uk-navbar-dropdown-nav-divider">Divider</option>
+                            <option value="uk-navbar-dropdown-nav-background">Background</option>
+                        </select>
+                    </div>
 
-                        <ul class="uk-nav uk-navbar-dropdown-nav">
-                            <li class="uk-active"><a href="#">Active</a></li>
-                            <li class="uk-parent">
-                                <a href="#">Parent</a>
-                                <ul class="uk-nav-sub">
-                                    <li><a href="#">Sub item</a></li>
-                                    <li><a href="#">Sub item</a>
-                                        <ul>
+                    <div uk-grid>
+                        <div class="uk-width-1-2@m">
+
+                            <div class="uk-navbar-dropdown test">
+
+                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                    <li class="uk-active"><a href="#">Active</a></li>
+                                    <li class="uk-parent">
+                                        <a href="#">Parent</a>
+                                        <ul class="uk-nav-sub">
                                             <li><a href="#">Sub item</a></li>
+                                            <li><a href="#">Sub item</a>
+                                                <ul>
+                                                    <li><a href="#">Sub item</a></li>
+                                                    <li><a href="#">Sub item</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="uk-parent">
+                                        <a href="#">Parent</a>
+                                        <ul class="uk-nav-sub">
+                                            <li class="uk-active"><a href="#">Active</a></li>
                                             <li><a href="#">Sub item</a></li>
                                         </ul>
                                     </li>
+                                    <li class="uk-nav-header">Header</li>
+                                    <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: table"></span> Item</a></li>
+                                    <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Item</a></li>
+                                    <li class="uk-nav-divider"></li>
+                                    <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> Item</a></li>
                                 </ul>
-                            </li>
-                            <li class="uk-parent">
-                                <a href="#">Parent</a>
-                                <ul class="uk-nav-sub">
-                                    <li class="uk-active"><a href="#">Active</a></li>
-                                    <li><a href="#">Sub item</a></li>
+
+                            </div>
+
+                        </div>
+                        <div class="uk-width-1-2@m">
+
+                            <div class="uk-navbar-dropdown test">
+
+                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                    <li class="uk-active"><a href="#"><div>Active<div class="uk-nav-subtitle">Subtitle lorem ipsum dolor sit amet, consectetur adipiscing.</div></div></a></li>
+                                    <li><a href="#"><div>Item<div class="uk-nav-subtitle">Subtitle lorem ipsum dolor sit amet, consectetur adipiscing.</div></div></a></li>
+                                    <li><a href="#"><div>Item<div class="uk-nav-subtitle">Subtitle lorem ipsum dolor sit amet, consectetur adipiscing.</div></div></a></li>
+                                    <li><a href="#"><div>Item<div class="uk-nav-subtitle">Subtitle lorem ipsum dolor sit amet, consectetur adipiscing.</div></div></a></li>
                                 </ul>
-                            </li>
-                            <li class="uk-nav-header">Header</li>
-                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: table"></span> Item</a></li>
-                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Item</a></li>
-                            <li class="uk-nav-divider"></li>
-                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> Item</a></li>
-                        </ul>
 
-                    </div>
+                            </div>
 
-                </div>
-                <div class="uk-width-1-4@m">
-
-                    <div class="uk-navbar-dropdown test">
-
-                        <ul class="uk-nav uk-navbar-dropdown-nav">
-                            <li class="uk-active"><a href="#"><div>Active<div class="uk-nav-subtitle">Subtitle lorem ipsum dolor sit amet, consectetur adipiscing.</div></div></a></li>
-                            <li><a href="#"><div>Item<div class="uk-nav-subtitle">Subtitle lorem ipsum dolor sit amet, consectetur adipiscing.</div></div></a></li>
-                            <li><a href="#"><div>Item<div class="uk-nav-subtitle">Subtitle lorem ipsum dolor sit amet, consectetur adipiscing.</div></div></a></li>
-                            <li><a href="#"><div>Item<div class="uk-nav-subtitle">Subtitle lorem ipsum dolor sit amet, consectetur adipiscing.</div></div></a></li>
-                        </ul>
-
+                        </div>
                     </div>
 
                 </div>
@@ -1910,7 +1924,7 @@
             </div>
         </nav>
 
-        <nav class="uk-navbar-container uk-margin uk-position-relative uk-position-z-index"><!-- Position context only needed for demo showcase -->
+        <nav class="uk-navbar-container uk-margin">
             <div class="uk-container">
                 <div uk-navbar="dropbar: true; dropbar-anchor: !.uk-navbar-container; align: center">
                     <div class="uk-navbar-left">
@@ -3339,6 +3353,20 @@
             UIkit.util.on('#js-size-switcher', 'change', function () {
                 var value = this.value;
                 UIkit.util.$$('.uk-navbar-dropdown').forEach(function (table) {
+                    UIkit.util.removeClass(table, options);
+                    UIkit.util.addClass(table, value);
+                });
+            });
+
+        </script>
+
+        <script>
+
+            var options = UIkit.util.$$('#js-nav-style-switcher option').map(function (option) { return option.value; });
+
+            UIkit.util.on('#js-nav-style-switcher', 'change', function () {
+                var value = this.value;
+                UIkit.util.$$('.uk-nav').forEach(function (table) {
                     UIkit.util.removeClass(table, options);
                     UIkit.util.addClass(table, value);
                 });

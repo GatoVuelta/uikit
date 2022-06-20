@@ -76,6 +76,7 @@
 @nav-background-margin-top:                     0;
 @nav-background-item-padding-horizontal:        10px;
 @nav-background-item-padding-vertical:          10px;
+@nav-background-item-color:                     @global-color;
 @nav-background-item-hover-background:          @global-muted-background;
 @nav-background-item-hover-color:               @global-color;
 @nav-background-item-active-background:         @global-muted-background;
@@ -363,6 +364,7 @@ ul.uk-nav-sub {
 
 .uk-nav-background > li > a {
     padding: @nav-background-item-padding-vertical @nav-background-item-padding-horizontal;
+    color: @nav-background-item-color;
     .hook-nav-background-item();
 }
 
