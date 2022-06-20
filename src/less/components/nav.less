@@ -81,6 +81,7 @@
 @nav-background-item-hover-color:               @global-color;
 @nav-background-item-active-background:         @global-muted-background;
 @nav-background-item-active-color:              @global-emphasis-color;
+@nav-background-sublist-padding-left:           @nav-sublist-padding-left + @nav-background-item-padding-horizontal;
 
 @nav-dividers-margin-top:                       5px;
 
@@ -381,6 +382,8 @@ ul.uk-nav-sub {
     color: @nav-background-item-active-color;
     .hook-nav-background-item-active();
 }
+
+.uk-nav-background .uk-nav-sub { padding-left: @nav-background-sublist-padding-left; }
 
 /*
  * Divider
